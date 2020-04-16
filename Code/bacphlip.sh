@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 ###Default program path assume hmmer and python are globally accessibles
 HMMSEARCH_PATH="hmmsearch"
@@ -87,8 +87,8 @@ fi
 
 ###Run HMMSEARCH
 echo "###############################################################"
-echo "Running hmmsearch on amino acid fasta file located at $PROTEINS_FASTA."
-HMMSEARCH_OUT="$PROTEINS_FASTA.bacphlip.hmmsearch"
+echo "Running hmmsearch on amino acid fasta file located at $PROTEINS_FASTA"
+HMMSEARCH_OUT="$PROTEINS_FASTA.hmmsearch"
 hmmsearch $HMM_DB $PROTEINS_FASTA > $HMMSEARCH_OUT
 if [[ $? = 0 ]]; then
     echo "Program call appears to be successful."
@@ -101,7 +101,7 @@ echo ""
 
 ####Compile HMMsearch results.
 echo "###############################################################"
-echo "Parsing hmmsearch results located at $HMMSEARCH_OUT."
+echo "Parsing hmmsearch results located at $HMMSEARCH_OUT"
 HMMSEARCH_DF="$HMMSEARCH_OUT.df"
 $PYTHON_PATH $DIR/lib/process_hmmsearch.py -i $HMMSEARCH_OUT -o $HMMSEARCH_DF
 if [[ $? = 0 ]]; then
@@ -113,18 +113,17 @@ fi
 echo "Results written to $HMMSEARCH_DF"
 echo ""
 
-####Run predictor
-#echo "Running classifier on $HMMSEARCH_DF"
-#PREDICTION_FILE="$PROTEINS_FASTA.bacphlip.predictions"
-#$PYTHON_PATH lifestyle_classifier.py $HMMSEARCH_DF $PREDICTION_FILE
-#wait
-#if [[ $? = 0 ]]; then
-#    echo "Program call appears to be successful."
-#else
-#    echo "Something went wrong (error code $?). Exiting."
-#    exit 1
-#fi
-#echo ""
-#echo "Full program completed! Hopefully without any errors noted above!"
-#echo ""
-#
+###Run predictor
+echo "Running classifier on $HMMSEARCH_DF"
+PREDICTION_FILE="$PROTEINS_FASTA.bacphlip"
+$PYTHON_PATH $DIR/lib/lifestyle_classifier.py -i $HMMSEARCH_DF -o $PREDICTION_FILE
+if [[ $? = 0 ]]; then
+    echo "Program call appears to be successful."
+else
+    echo "Something went wrong (error code $?). Exiting."
+    exit 1
+fi
+echo ""
+echo "Full program completed! Hopefully without any errors noted above!"
+echo ""
+
