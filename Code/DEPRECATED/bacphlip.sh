@@ -1,16 +1,17 @@
 #!/bin/bash
 
-###Default program path assume hmmer and python are globally accessibles
+###The default program path assumes hmmsearch and python are globally accessible
 HMMSEARCH_PATH="hmmsearch"
 PYTHON_PATH="python"
 
-###Get directory of program for library and data files
+###Identify the base directory of this program to easily point towards library and data files
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+###Location of the hmm file to use for hmmsearch
 HMM_DB=$DIR/lib/prot_models.hmm
 
 ###Help function
 function usage() {
-    echo "Welcome to BacPhLiP"
+    echo "Welcome to BACPHLIP"
     echo ""
     echo -e "\t-h --help"
     echo -e "\t--environment=$HMMSEARCH_PATH"
