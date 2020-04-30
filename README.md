@@ -1,10 +1,10 @@
 # BACPHLIP-model-dev 
 
 ## Project overview
-This repository covers the design and building of BACPHLIP (a bacteriophage lifestyle prediction tool). 
+This repository covers the design and building of [BACPHLIP (a bacteriophage lifestyle prediction tool)](https://github.com/adamhockenberry/bacphlip). 
 
-Users looking to classy the lifestyle of their favorite phage should not be here and should instead navigate directly to the separate BACPHLIP repository:
-    https://github.com/adamhockenberry/bacphlip-py
+Users looking to classy the lifestyle of their favorite phage should not be here and should instead navigate directly to the separate [BACPHLIP repository](https://github.com/adamhockenberry/bacphlip):
+    
 
 The purpose of *this* repository is for full scientific transparency with regard to the associated BACPHLIP publication, which can be found at:
     xxx
@@ -21,14 +21,14 @@ If you're not re-downloading any data files (this can take some time and we enco
 ## Requirements
 Users will need several items if they wish to fully step through all of the associated code. In addition to python and several common packages that should be obvious within the notebooks, users will need to:
 
-    1. Install HMMER3 (available from http://hmmer.org/)
-    2. Download the full dataset associated with this repository from zenodo and unzip into a "Data" folder at the root of this directory (xxxx)
-    3. A small (and optional) portion of the code also relies on fastANI (https://github.com/ParBLiSS/FastANI) to cluster sequences. This is used for a more stringent test of model accuracy but is not strictly necessary
+1. Install HMMER3 (available from http://hmmer.org/)
+2. Download the full dataset associated with this repository from zenodo and unzip into a "Data" folder at the root of this directory (xxxx)
+3. A small (and optional) portion of the code also relies on fastANI (https://github.com/ParBLiSS/FastANI) to cluster sequences. This is used for a more stringent test of model accuracy but is not strictly necessary
 
 ## Usage walkthrough
 1. (ignore if only updating conserved domains) Step through `1-compile_phage_training_data.ipynb`. This should run with no errors and if you have downloaded/cloned the full repository this should do basically nothing except replace/re-write some files that were already there.
 
-2. (optional: Download and replace the `cddid.tbl` file contained within `../Data/protein_domain_data/` to use an updated database. See link in the referenced notebook that follows.) Next, step through the notebook titled `2-compile_search_families.ipynb`. Depending on your goals here, you *may* want to ensure that you've deleted all existing `.afa` (and `.hmm` files, if they've been built) or alter the code accordingly to place an updated database in a new folder. In default formatting, the code will not re-download existing `.afa` files even though more recent updates to CDD may expand the size/quality of these files. I am of the opinion that this should be done only on the order of every few months.
+2. (optional: Download and replace the `cddid.tbl` file contained within `../Data/protein_domain_data/` to use an updated database. See link in the referenced notebook that follows.) Next, step through the notebook titled `2-compile_search_families.ipynb`. Depending on your goals here, you *may* want to ensure that you've deleted all existing `.afa` (and `.hmm` files, if they've been built) or alter the code accordingly to place an updated database in a new folder. In default formatting, and assuming that you've downloaded the associated `Data` directory, the code **will not** re-download existing `.afa` files even though more recent updates to CDD may expand the size/quality of these files. I am of the opinion that this should be done only on the order of every few months.
 
 3. Now step through `3-hmmer_time.ipynb`. This is the part of the pipeline where you'll face a mountain of errors if you don't have HMMER3 installed. This will first create `.hmm` files for each of the protein domain `.afa` files. To check that the HMMER3 software is installed and accessible just type `hmmbuild` in your terminal. You should **not** see any variation of "command not found". The code assumes that the HMMER3 installation is accessible in your system path, but experienced useres may with to alter this code in order to point to a local install. This notebook then uses `hmmsearch` to create output files (containing information for all of the protein domains) for each of the viral sequences. This may take an hour or two to run. Note that I'm also running `hmmsearch` with defaults and it may be wise to tweak some sensitivity parameters at a future date/update. 
 
