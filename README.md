@@ -22,7 +22,7 @@ If you're not re-downloading any data files (this can take some time and we enco
 Users will need several items if they wish to fully step through all of the associated code. In addition to python and several common packages that should be obvious within the import section of the notebooks, users will need to:
 
 1. Install HMMER3 (available from http://hmmer.org/)
-2. Download the full dataset associated with this repository from zenodo and unzip into a "Data" folder at the root of this directory (xxxx)
+2. Download the full dataset associated with this repository from zenodo and unzip into a "Data" folder at the root of this directory (https://doi.org/10.5281/zenodo.4058664)
 3. A small (and optional) portion of the code also relies on fastANI (https://github.com/ParBLiSS/FastANI) to cluster sequences. This is used for a more stringent test of model accuracy but is not strictly necessary
 
 ## Usage walkthrough
